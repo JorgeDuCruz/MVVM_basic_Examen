@@ -137,6 +137,7 @@ fun Boton_Start(miViewModel: MyViewModel, enum_color: Colores) {
         onClick = {
             Log.d(TAG_LOG, "Dentro del Start - Estado: ${miViewModel.estadoActual.value.name}")
             miViewModel.crearRandom()
+            miViewModel.cuentaAtras()
         },
         modifier = Modifier
             .size((100).dp, (40).dp)

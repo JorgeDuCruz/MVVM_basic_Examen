@@ -100,7 +100,7 @@ class MyViewModel(): ViewModel() {
     /**
      * Corutina que inicia la cuenta atras
      */
-    fun CuentaAtras(){
+    fun cuentaAtras(){
         _activaCuentaAtras.value= EstadosAuxiliares.ACTIVA
         _tiempo.value = 5
         cuentaAtras = viewModelScope.launch {
