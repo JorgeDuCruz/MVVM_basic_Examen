@@ -7,7 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class MyViewModel(): ViewModel() {
+object MyViewModel: ViewModel() {
 
     // etiqueta para logcat
     private val TAG_LOG = "miDebug"
