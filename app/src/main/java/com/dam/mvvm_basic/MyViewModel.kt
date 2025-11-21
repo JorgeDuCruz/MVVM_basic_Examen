@@ -78,15 +78,15 @@ class MyViewModel(): ViewModel() {
             // los recorremos
             var estadoAux = EstadosAuxiliares.AUX1
             Log.d(TAG_LOG, "estado (corutina): ${estadoAux}")
-            Log.d(TAG_LOG, "mensaje (corutina): ${msg}")
+            Log.d(TAG_LOG, "mensaje (corutina): ${estadoAux.funcion(msg)}")
             delay(1500)
             estadoAux = EstadosAuxiliares.AUX2
             Log.d(TAG_LOG, "estado (corutina): ${estadoAux}")
-            Log.d(TAG_LOG, "mensaje (corutina): ${msg}")
+            Log.d(TAG_LOG, "mensaje (corutina): ${estadoAux.funcion(msg)}")
             delay(1500)
             estadoAux = EstadosAuxiliares.AUX3
             Log.d(TAG_LOG, "estado (corutina): ${estadoAux}")
-            Log.d(TAG_LOG, "mensaje (corutina): ${msg}")
+            Log.d(TAG_LOG, "mensaje (corutina): ${estadoAux.funcion(msg)}")
             delay(1500)
         }
     }

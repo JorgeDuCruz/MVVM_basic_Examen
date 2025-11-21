@@ -41,8 +41,8 @@ enum class Estados(val start_activo: Boolean, val boton_activo: Boolean) {
  * Estados auxiliares para corutinas en el ViewModel
  * @param txt: String nombre del estado
  */
-enum class EstadosAuxiliares(val txt: String) {
-    AUX1(txt = "aux1"),
-    AUX2(txt = "aux2"),
-    AUX3(txt = "aux3"),
+enum class EstadosAuxiliares(val txt: String, val funcion: (String)-> String) {
+    AUX1(txt = "aux1", funcion = {msj -> msj}),
+    AUX2(txt = "aux2", funcion = {msj -> msj.lowercase()}),
+    AUX3(txt = "aux3", funcion = {msj -> msj.uppercase()}),
 }
