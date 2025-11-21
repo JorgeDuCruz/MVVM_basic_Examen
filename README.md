@@ -1,16 +1,11 @@
-## Introducción
+## Ejercicio 3 #20
+Añade a los estados auxiliares (sin cambiar el enum) una función própia que tendrá como parámetro una String y que devuelva una String
 
-El objetivo de esta app es describir las diferentes clases y como se interrelacionan para el [modelo MVVM](https://developer.android.com/topic/libraries/architecture/viewmodel?hl=es-419)
+    En el estado AUX1 devolverá la string sin modificarla
+    En el estado AUX2 devolverá la string en minúsculas
+    En el estado AUX3 devolverá la string en mayúscula
 
-## Escenario
-Tenemos nuestra aplicación diseñada y codificada y queremos transformarla a la arquitectura MVVC, separar el manejo de datos de la activity principal.
+En la función estadosAuxiliares(msg: String = ""):
 
-Además utilizar el patrón de diseño [Observer](https://es.wikipedia.org/wiki/Observer_(patr%C3%B3n_de_dise%C3%B1o))
+    El logcat (mensaje (corutina))debe usar lo que devuelve las funciones de los estados para imprimir el mensaje (msg)
 
-En este caso, el único dato que vamos a manejar son enteros aleatorios. 
-
-## Corrutinas
-En esta rama vamos a usar corrutinas:
-
-- En el ViewModel con la función `estadosAuxiliares` utilizando `viewModelScope.launch { }`
-- En la IU con `LaunchedEffect(_activo)` en el botón start
