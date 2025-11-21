@@ -3,6 +3,7 @@ package com.dam.mvvm_basic
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -20,6 +21,10 @@ class MyViewModel(): ViewModel() {
     // este va a ser nuestra lista para la secuencia random
     // usamos mutable, ya que la queremos modificar
     var _numbers = MutableStateFlow(0)
+    // tiempo que queda de cuenta atras
+    val _tiempo = MutableStateFlow(5)
+    var cuentaAtras: Job? = null
+    val _activaCuentaAtras = MutableStateFlow(EstadosAuxiliares.INACTIVA)
 
     // inicializamos variables cuando instanciamos
     init {
@@ -58,6 +63,7 @@ class MyViewModel(): ViewModel() {
             Log.d(TAG_LOG, "GANAMOS - Estado: ${estadoActual.value}")
             //lanzamos estados auxiliares en paralelo
             estadosAuxiliares("Ganador")
+            cancelarCuentAtras()
             true
         } else {
             Log.d(TAG_LOG, "no es correcto")
@@ -89,5 +95,29 @@ class MyViewModel(): ViewModel() {
             Log.d(TAG_LOG, "mensaje (corutina): ${msg}")
             delay(1500)
         }
+    }
+
+    /**
+     * Corutina que inicia la cuenta atras
+     */
+    fun CuentaAtras(){
+        _activaCuentaAtras.value= EstadosAuxiliares.ACTIVA
+        _tiempo.value = 5
+        cuentaAtras = viewModelScope.launch {
+            while (_tiempo.value>0){
+                delay(1000)
+                _tiempo.value--
+            }
+            cancelarCuentAtras()
+        }
+    }
+
+    /**
+     * Función que ocurre cuando se tiene que terminar la cuenta atras
+     */
+    fun cancelarCuentAtras(){
+        cuentaAtras?.cancel()
+        estadoActual.value = Estados.INICIO
+        _activaCuentaAtras.value = EstadosAuxiliares.INACTIVA
     }
 }
