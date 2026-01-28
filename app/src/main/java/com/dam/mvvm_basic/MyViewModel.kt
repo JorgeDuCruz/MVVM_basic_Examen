@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class MyViewModel(): ViewModel() {
 
     // etiqueta para logcat
-    private val TAG_LOG = "miDebug"
+    private val TAG_LOG = "pruebas"
 
     // estados del juego
     // usamos LiveData para que la IU se actualice
@@ -25,6 +25,12 @@ class MyViewModel(): ViewModel() {
     val _tiempo = MutableStateFlow(5)
     var cuentaAtras: Job? = null
     val _activaCuentaAtras = MutableStateFlow(EstadosAuxiliares.INACTIVA)
+
+    var cuentaAdelante: Job? = null
+
+    val _activaCuentaAdelante = MutableStateFlow(EstadosAuxiliares.INACTIVA)
+
+    val _tiempo2 = MutableStateFlow(0)
 
     // inicializamos variables cuando instanciamos
     init {
@@ -117,6 +123,31 @@ class MyViewModel(): ViewModel() {
      */
     fun cancelarCuentAtras(){
         cuentaAtras?.cancel()
+        estadoActual.value = Estados.INICIO
+        _activaCuentaAtras.value = EstadosAuxiliares.INACTIVA
+    }
+
+    /**
+     * Corutina que inicia la cuenta adelante
+     */
+    fun cuentaAdelante(){
+        _activaCuentaAdelante.value= EstadosAuxiliares.ACTIVA
+        _tiempo2.value = 0
+        _activaCuentaAdelante.value = EstadosAuxiliares.EJECUTANDO
+        cuentaAdelante = viewModelScope.launch {
+            while (_tiempo2.value>10){
+                delay(1000)
+                _tiempo2.value++
+            }
+            cancelarCuentaAdelante()
+        }
+    }
+
+    /**
+     * Función que ocurre cuando se tiene que terminar la cuenta atras
+     */
+    fun cancelarCuentaAdelante(){
+        cuentaAdelante?.cancel()
         estadoActual.value = Estados.INICIO
         _activaCuentaAtras.value = EstadosAuxiliares.INACTIVA
     }

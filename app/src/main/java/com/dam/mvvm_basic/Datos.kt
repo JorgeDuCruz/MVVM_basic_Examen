@@ -46,5 +46,7 @@ enum class EstadosAuxiliares(val txt: String) {
     AUX2(txt = "aux2"),
     AUX3(txt = "aux3"),
     ACTIVA(txt= "Cuenta atras activa"),
-    INACTIVA(txt = "Cuenat atras inaciva")
+    INACTIVA(txt = "Cuenta atras inaciva"),
+
+    EJECUTANDO(txt = "Ejecuntando")
 }

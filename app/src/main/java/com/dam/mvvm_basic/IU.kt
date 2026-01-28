@@ -42,6 +42,7 @@ fun IU(miViewModel: MyViewModel) {
         verticalArrangement = Arrangement.SpaceAround)
     {
         Column {
+            CuentaAdelante(miViewModel)
             CuentaAtras(miViewModel)
             Row {
                 // creo un boton rojo
@@ -68,6 +69,14 @@ fun CuentaAtras(miViewModel: MyViewModel) {
     val tiempo by miViewModel._tiempo.collectAsState()
     Text(
         text = "$tiempo"
+    )
+}
+
+@Composable
+fun CuentaAdelante(miViewModel: MyViewModel) {
+    val tiempo2 by miViewModel._tiempo2.collectAsState()
+    Text(
+        text = "$tiempo2"
     )
 }
 
